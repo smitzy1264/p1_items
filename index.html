@@ -43,9 +43,7 @@
     .tooltip {
       visibility: hidden;
       position: absolute;
-      bottom: 100%;       /* alapból felfelé */
-      left: 105%;         /* jobbra tolva */
-      transform: translateY(-5px);
+      left: 105%;         /* mindig jobbra */
       z-index: 1;
       background: rgba(0,0,0,0.8);
       padding: 5px;
@@ -102,37 +100,25 @@
       const tooltip = el.querySelector(".tooltip");
       const img = tooltip.querySelector("img");
 
-      el.addEventListener("mouseenter", () => {
+      el.addEventListener("mouseenter", (e) => {
         tooltip.style.visibility = "visible";
 
         requestAnimationFrame(() => {
-          // alapbeállítások visszaállítása
-          tooltip.style.top = "auto";
-          tooltip.style.bottom = "100%";
-          tooltip.style.transform = "translateY(-5px)";
+          // alapbeállítás
           img.style.maxWidth = "none";
           img.style.maxHeight = "none";
 
+          const parentRect = el.getBoundingClientRect();
+          const cursorY = e.clientY - parentRect.top;
+          const tooltipHeight = tooltip.offsetHeight;
+
+          // tooltip közepét a kurzorhoz igazítjuk
+          const offset = cursorY - tooltipHeight / 2;
+          tooltip.style.top = offset + "px";
+
+          // ha kilógna → kicsinyítjük
           const rect = tooltip.getBoundingClientRect();
-
-          // ha túl fent van → lefelé nyíljon
-          if (rect.top < 0) {
-            tooltip.style.bottom = "auto";
-            tooltip.style.top = "100%";
-            tooltip.style.transform = "translateY(5px)";
-          }
-          // ha túl lent van → felfelé nyíljon
-          else if (rect.bottom > window.innerHeight) {
-            tooltip.style.top = "auto";
-            tooltip.style.bottom = "100%";
-            tooltip.style.transform = "translateY(-5px)";
-          }
-
-          // újra lekérjük a pozíciót
-          const newRect = tooltip.getBoundingClientRect();
-
-          // ha még mindig kilóg → kicsinyítjük a képet
-          if (newRect.top < 0 || newRect.bottom > window.innerHeight) {
+          if (rect.top < 0 || rect.bottom > window.innerHeight) {
             img.style.maxWidth = "150px";
             img.style.maxHeight = "150px";
           }
@@ -142,8 +128,6 @@
       el.addEventListener("mouseleave", () => {
         tooltip.style.visibility = "hidden";
         tooltip.style.top = "auto";
-        tooltip.style.bottom = "100%";
-        tooltip.style.transform = "translateY(-5px)";
         img.style.maxWidth = "none";
         img.style.maxHeight = "none";
       });
