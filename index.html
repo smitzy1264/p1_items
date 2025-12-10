@@ -63,6 +63,9 @@
     <select id="specDropdown">
       <option value="">-- Válassz spec-et --</option>
     </select>
+    <select id="phaseDropdown">
+      <option value="">-- Válassz phase-t --</option>
+    </select>
     <div id="results"></div>
   </div>
 
@@ -76,6 +79,8 @@
       skipEmptyLines: true,
       complete: function(results) {
         data = results.data;
+
+        // Spec dropdown feltöltése
         const specs = [...new Set(data.map(row => row.spec).filter(Boolean))];
         const dropdown = document.getElementById("specDropdown");
         specs.forEach(spec => {
@@ -83,6 +88,16 @@
           opt.value = spec;
           opt.textContent = spec;
           dropdown.appendChild(opt);
+        });
+
+        // Phase dropdown feltöltése
+        const phases = [...new Set(data.map(row => row.phase).filter(Boolean))];
+        const phaseDropdown = document.getElementById("phaseDropdown");
+        phases.forEach(phase => {
+          const opt = document.createElement("option");
+          opt.value = phase;
+          opt.textContent = phase;
+          phaseDropdown.appendChild(opt);
         });
       }
     });
@@ -104,7 +119,6 @@
         tooltip.style.visibility = "visible";
 
         requestAnimationFrame(() => {
-          // alapbeállítás
           img.style.maxWidth = "none";
           img.style.maxHeight = "none";
 
@@ -112,15 +126,13 @@
           const cursorY = e.clientY - parentRect.top;
           const tooltipHeight = tooltip.offsetHeight;
 
-          // tooltip közepét a kurzorhoz igazítjuk
           const offset = cursorY - tooltipHeight / 2;
           tooltip.style.top = offset + "px";
 
-          // ha kilógna → kicsinyítjük
           const rect = tooltip.getBoundingClientRect();
           if (rect.top < 0 || rect.bottom > window.innerHeight) {
-            img.style.maxWidth = "300px";
-            img.style.maxHeight = "300px";
+            img.style.maxWidth = "250px";
+            img.style.maxHeight = "250px";
           }
         });
       });
@@ -135,7 +147,7 @@
       return el;
     }
 
-    // Item keresés
+    // Keresés
     document.getElementById("searchBox").addEventListener("input", function() {
       const q = this.value.trim().toLowerCase();
       const resultsDiv = document.getElementById("results");
@@ -155,16 +167,18 @@
       matches.forEach(row => resultsDiv.appendChild(renderItem(row)));
     });
 
-    // Spec BIS lista
-    document.getElementById("specDropdown").addEventListener("change", function() {
-      const selectedSpec = this.value;
+    // Spec + Phase BIS lista
+    function updateResults() {
+      const selectedSpec = document.getElementById("specDropdown").value;
+      const selectedPhase = document.getElementById("phaseDropdown").value;
       const resultsDiv = document.getElementById("results");
       resultsDiv.innerHTML = "";
 
-      if (!selectedSpec) return;
+      if (!selectedSpec || !selectedPhase) return;
 
       const matches = data.filter(row =>
-        (row.spec || "").toLowerCase() === selectedSpec.toLowerCase()
+        (row.spec || "").toLowerCase() === selectedSpec.toLowerCase() &&
+        (row.phase || "").toLowerCase() === selectedPhase.toLowerCase()
       );
 
       if (matches.length === 0) {
@@ -172,10 +186,12 @@
         return;
       }
 
-      resultsDiv.innerHTML = `<h3>${selectedSpec} BIS lista:</h3>`;
+      resultsDiv.innerHTML = `<h3>${selectedSpec} ${selectedPhase} BIS lista:</h3>`;
       matches.forEach(row => resultsDiv.appendChild(renderItem(row, false)));
-    });
+    }
+
+    document.getElementById("specDropdown").addEventListener("change", updateResults);
+    document.getElementById("phaseDropdown").addEventListener("change", updateResults);
   </script>
 </body>
 </html>
-
