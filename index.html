@@ -148,7 +148,7 @@
       return el;
     }
 
-    // Keresés
+    // Keresés (spec + phase figyelembe véve)
     document.getElementById("searchBox").addEventListener("input", function() {
       const q = this.value.trim().toLowerCase();
       const resultsDiv = document.getElementById("results");
@@ -156,8 +156,13 @@
 
       if (!q) return;
 
+      const selectedSpec = document.getElementById("specDropdown").value;
+      const selectedPhase = document.getElementById("phaseDropdown").value;
+
       const matches = data.filter(row =>
-        (row.item_name || "").toLowerCase().includes(q)
+        (row.item_name || "").toLowerCase().includes(q) &&
+        (!selectedSpec || (row.spec || "").toLowerCase() === selectedSpec.toLowerCase()) &&
+        (!selectedPhase || (row.phase || "").toLowerCase() === selectedPhase.toLowerCase())
       );
 
       if (matches.length === 0) {
