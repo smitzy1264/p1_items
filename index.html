@@ -51,8 +51,10 @@
       border-radius: 6px;
     }
     .tooltip img {
-      max-width: 200px; /* eredeti méret, de max 200px széles */
-      height: auto;
+      width: auto;      /* ne legyen fix szélesség */
+      height: auto;     /* ne legyen fix magasság */
+      max-width: none;  /* ne korlátozza a szélességet */
+      max-height: none; /* ne korlátozza a magasságot */
       display: block;
     }
     .item:hover .tooltip {
@@ -146,3 +148,4 @@
   </script>
 </body>
 </html>
+
