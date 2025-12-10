@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
-  <title>Item kereső</title>
+  <title>WotLK Phase 1 BIS kereső</title>
   <style>
     body {
       margin: 0;
@@ -17,18 +17,17 @@
       flex-direction: column;
       justify-content: center;   /* függőlegesen középre */
       align-items: center;       /* vízszintesen középre */
-      height: 100vh;             /* teljes képernyő */
-      text-shadow: 1px 1px 3px black; /* olvashatóbb szöveg */
+      height: 100vh;
+      text-shadow: 1px 1px 3px black;
     }
-    h1 {
-      margin-bottom: 20px;
-    }
-    input {
+    h1 { margin-bottom: 20px; }
+    input, select {
       padding: 10px;
       width: 300px;
       border-radius: 8px;
       border: none;
       font-size: 16px;
+      margin: 5px;
     }
     #results {
       margin-top: 20px;
@@ -41,8 +40,13 @@
 </head>
 <body>
   <div class="container">
-    <h1>Item kereső</h1>
+    <h1>WotLK Phase 1 BIS kereső</h1>
+    <!-- Item kereső -->
     <input type="text" id="searchBox" placeholder="Írd be az item nevét...">
+    <!-- Spec dropdown -->
+    <select id="specDropdown">
+      <option value="">-- Válassz spec-et --</option>
+    </select>
     <div id="results"></div>
   </div>
 
@@ -51,47 +55,67 @@
   <script>
     let data = [];
 
-    // CSV betöltése
     Papa.parse("items.csv", {
       download: true,
       header: true,
       skipEmptyLines: true,
       complete: function(results) {
         data = results.data;
-      },
-      error: function(err) {
-        console.error("Hiba a CSV betöltésénél:", err);
+
+        // Spec-ek kigyűjtése a dropdownhoz
+        const specs = [...new Set(data.map(row => row.spec).filter(Boolean))];
+        const dropdown = document.getElementById("specDropdown");
+        specs.forEach(spec => {
+          const opt = document.createElement("option");
+          opt.value = spec;
+          opt.textContent = spec;
+          dropdown.appendChild(opt);
+        });
       }
     });
 
-    // Keresés
+    // Item keresés
     document.getElementById("searchBox").addEventListener("input", function() {
       const q = this.value.trim().toLowerCase();
       const resultsDiv = document.getElementById("results");
       resultsDiv.innerHTML = "";
 
-      if (!q) {
-        resultsDiv.innerHTML = "<div class='muted'>Írj be valamit az item névből.</div>";
-        return;
-      }
+      if (!q) return;
 
       const matches = data.filter(row =>
         (row.item_name || "").toLowerCase().includes(q)
       );
 
       if (matches.length === 0) {
-        resultsDiv.innerHTML = "<div class='muted'>Nincs találat.</div>";
+        resultsDiv.innerHTML = "<p>Nincs találat.</p>";
         return;
       }
 
       matches.forEach(row => {
-        const itemName = row.item_name || "(nincs megadva)";
-        const character = row.character || "(nincs karakter)";
-        const slot = row.slot || "(nincs slot)";
-        const el = document.createElement("div");
-        el.className = "item";
-        el.innerHTML = `<b>${itemName}</b> → ${character} <span class="muted">(${slot})</span>`;
-        resultsDiv.appendChild(el);
+        resultsDiv.innerHTML += `<p><b>${row.item_name}</b> → ${row.spec} (${row.slot})</p>`;
+      });
+    });
+
+    // Spec BIS lista
+    document.getElementById("specDropdown").addEventListener("change", function() {
+      const selectedSpec = this.value;
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "";
+
+      if (!selectedSpec) return;
+
+      const matches = data.filter(row =>
+        (row.spec || "").toLowerCase() === selectedSpec.toLowerCase()
+      );
+
+      if (matches.length === 0) {
+        resultsDiv.innerHTML = "<p>Nincs találat.</p>";
+        return;
+      }
+
+      resultsDiv.innerHTML = `<h3>${selectedSpec} BIS lista:</h3>`;
+      matches.forEach(row => {
+        resultsDiv.innerHTML += `<p><b>${row.item_name}</b> → ${row.slot}</p>`;
       });
     });
   </script>
