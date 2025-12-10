@@ -1,11 +1,11 @@
 ﻿item_name;character;slot;spec;icon_url;phase
-T7;warlock;head;Affliction warlock;t7head.jpg;Phase 1
+T7;warlock;head;Affliction warlock;t7headlock.jpg;Phase 1
 Wyrmrest Necklace of Power;warlock;neck;Affliction warlock;wyrmrest.jpg;Phase 1
-T7;warlock;shoulder;Affliction warlock;t7shoulder.jpg;Phase 1
+T7;warlock;shoulder;Affliction warlock;t7shoulderlock.jpg;Phase 1
 Pennant Cloak;warlock;back;Affliction warlock;pennant.jpg;Phase 1
-T7;warlock;chest;Affliction warlock;t7chest.jpg;Phase 1
+T7;warlock;chest;Affliction warlock;t7chestlock.jpg;Phase 1
 Unsullied Cuffs;warlock;wrist;Affliction warlock;unsullied.jpg;Phase 1
-T7;warlock;hands;Affliction warlock;t7hands.jpg;Phase 1
+T7;warlock;hands;Affliction warlock;t7handslock.jpg;Phase 1
 Leash of Heedless Magic;warlock;waist;Affliction warlock;leash.jpg;Phase 1
 Leggings of the Wanton Spellcaster;warlock;legs;Affliction warlock;wanton.jpg;Phase 1
 Arcanic Tramplers;warlock;feet;Affliction warlock;arcanic.jpg;Phase 1
@@ -16,15 +16,15 @@ Illustration of the Dragon Soul;warlock;trinket;Affliction warlock;ids.jpg;Phase
 The Turning Tide;warlock;weapon;Affliction warlock;ttt.jpg;Phase 1
 Matriarch's Spawn;warlock;offhand;Affliction warlock;spawn.jpg;Phase 1
 Wand of the Archlich;warlock;relic;Affliction warlock;archlich.jpg;Phase 1
-T7;rogue;head;Assassination rogue;t7head.jpg;Phase 1
+T7;rogue;head;Assassination rogue;t7headassa.jpg;Phase 1
 Favor of the Dragon Queen;rogue;neck;Assassination rogue;fdq.jpg;Phase 1
-T7;rogue;shoulder;Assassination rogue;t7shoulders.jpg;Phase 1
+T7;rogue;shoulder;Assassination rogue;t7shouldersassa.jpg;Phase 1
 Drape of the Deadly Foe;rogue;back;Assassination rogue;drape.jpg;Phase 1
 Chestguard of the Recluse;rogue;chest;Assassination rogue;recluse.jpg;Phase 1
 Thrusting Bands;rogue;wrist;Assassination rogue;thrustingbands.jpg;Phase 1
-T7;rogue;hands;Assassination rogue;t7hands.jpg;Phase 1
+T7;rogue;hands;Assassination rogue;t7handsassa.jpg;Phase 1
 Stalk-Skin Belt;rogue;waist;Assassination rogue;ssbelt.jpg;Phase 1
-T7;rogue;legs;Assassination rogue;t7pants.jpg;Phase 1
+T7;rogue;legs;Assassination rogue;t7pantsassa.jpg;Phase 1
 Footwraps of Vile Deceit;rogue;feet;Assassination rogue;viledeceit.jpg;Phase 1
 Surge Needle Ring;rogue;ring;Assassination rogue;surgeneedle.jpg;Phase 1
 Ring of Invincibility;rogue;ring;Assassination rogue;roi.jpg;Phase 1
@@ -33,13 +33,13 @@ Mirror of Truth;rogue;trinket;Assassination rogue;mirroroftruth.jpg;Phase 1
 Webbed Death;rogue;weapon;Assassination rogue;webbeddeath.jpg;Phase 1
 Webbed Death;rogue;offhand;Assassination rogue;webbeddeath.jpg;Phase 1
 Envoy of Mortality;rogue;relic;Assassination rogue;envoy.jpg;Phase 1
-T7;warlock;head;Demonology Warlock;t7head.jpg;Phase 1
+T7;warlock;head;Demonology Warlock;t7headlock.jpg;Phase 1
 Wyrmrest Necklace of Power;warlock;neck;Demonology Warlock;wyrmrest.jpg;Phase 1
-T7;warlock;shoulder;Demonology Warlock;t7shoulder.jpg;Phase 1
+T7;warlock;shoulder;Demonology Warlock;t7shoulderlock.jpg;Phase 1
 Pennant Cloak;warlock;back;Demonology Warlock;pennant.jpg;Phase 1
-T7;warlock;chest;Demonology Warlock;t7chest.jpg;Phase 1
+T7;warlock;chest;Demonology Warlock;t7chestlock.jpg;Phase 1
 Unsullied Cuffs;warlock;wrist;Demonology Warlock;unsullied.jpg;Phase 1
-T7;warlock;hands;Demonology Warlock;t7hands.jpg;Phase 1
+T7;warlock;hands;Demonology Warlock;t7handslock.jpg;Phase 1
 Leash of Heedless Magic;warlock;waist;Demonology Warlock;leash.jpg;Phase 1
 Leggings of Mortal Arrogance;warlock;legs;Demonology Warlock;arrogance.jpg;Phase 1
 Arcanic Tramplers;warlock;feet;Demonology Warlock;arcanic.jpg;Phase 1
@@ -50,13 +50,13 @@ Sundial of the Exiled;warlock;trinket;Demonology Warlock;sundial.jpg;Phase 1
 The Turning Tide;warlock;weapon;Demonology Warlock;ttt.jpg;Phase 1
 Matriarch's Spawn;warlock;offhand;Demonology Warlock;spawn.jpg;Phase 1
 Wand of the Archlich;warlock;relic;Demonology Warlock;archlich.jpg;Phase 1
-T7;druid;head;Balance Druid;t7head.jpg;Phase 1
+T7;druid;head;Balance Druid;t7headbalance.jpg;Phase 1
 Wyrmrest Necklace of Power;druid;neck;Balance Druid;wyrmrest.jpg;Phase 1
-T7;druid;shoulder;Balance Druid;t7shoulders.jpg;Phase 1
+T7;druid;shoulder;Balance Druid;t7shouldersbalance.jpg;Phase 1
 Pennant Cloak;druid;back;Balance Druid;pennant.jpg;Phase 1
-T7;druid;chest;Balance Druid;t7chest.jpg;Phase 1
+T7;druid;chest;Balance Druid;t7chestbalance.jpg;Phase 1
 Unsullied Cuffs;druid;wrist;Balance Druid;unsullied.jpg;Phase 1
-T7;druid;hands;Balance Druid;t7hands.jpg;Phase 1
+T7;druid;hands;Balance Druid;t7handsbalance.jpg;Phase 1
 Leash of Heedless Magic;druid;waist;Balance Druid;leash.jpg;Phase 1
 Leggings of the Wanton Spellcaster;druid;legs;Balance Druid;wanton.jpg;Phase 1
 Footsteps of Malygos;druid;feet;Balance Druid;footsteps.jpg;Phase 1
