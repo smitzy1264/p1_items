@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
-  <title>WotLK Phase 1 BIS kereső</title>
+  <title>WotLK BIS kereső tooltip képpel</title>
   <style>
     body {
       margin: 0;
@@ -15,12 +15,11 @@
     .container {
       display: flex;
       flex-direction: column;
-      justify-content: center;   /* függőlegesen középre */
-      align-items: center;       /* vízszintesen középre */
+      justify-content: center;
+      align-items: center;
       height: 100vh;
       text-shadow: 1px 1px 3px black;
     }
-    h1 { margin-bottom: 20px; }
     input, select {
       padding: 10px;
       width: 300px;
@@ -37,31 +36,40 @@
       width: 340px;
     }
     .item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 8px;
+      position: relative;
+      margin-bottom: 10px;
+      cursor: pointer;
     }
-    .item img {
-      width: 32px;
-      height: 32px;
-      margin-right: 10px;
-      border-radius: 4px;
+    .tooltip {
+      visibility: hidden;
+      position: absolute;
+      top: -10px; /* kicsit a szöveg fölé */
+      left: 105%;
+      z-index: 1;
+      background: rgba(0,0,0,0.8);
+      padding: 5px;
+      border-radius: 6px;
+    }
+    .tooltip img {
+      max-width: 200px; /* eredeti méret, de max 200px széles */
+      height: auto;
+      display: block;
+    }
+    .item:hover .tooltip {
+      visibility: visible;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>WotLK Phase 1 BIS kereső</h1>
-    <!-- Item kereső -->
+    <h1>WotLK BIS kereső</h1>
     <input type="text" id="searchBox" placeholder="Írd be az item nevét...">
-    <!-- Spec dropdown -->
     <select id="specDropdown">
       <option value="">-- Válassz spec-et --</option>
     </select>
     <div id="results"></div>
   </div>
 
-  <!-- PapaParse: CSV beolvasás -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <script>
     let data = [];
@@ -72,8 +80,6 @@
       skipEmptyLines: true,
       complete: function(results) {
         data = results.data;
-
-        // Spec-ek kigyűjtése a dropdownhoz
         const specs = [...new Set(data.map(row => row.spec).filter(Boolean))];
         const dropdown = document.getElementById("specDropdown");
         specs.forEach(spec => {
@@ -84,6 +90,18 @@
         });
       }
     });
+
+    function renderItem(row, showSpec=true) {
+      const el = document.createElement("div");
+      el.className = "item";
+      el.innerHTML = `
+        <span><b>${row.item_name}</b>${showSpec ? " → " + row.spec : ""} (${row.slot})</span>
+        <div class="tooltip">
+          <img src="${row.icon_url}" alt="icon">
+        </div>
+      `;
+      return el;
+    }
 
     // Item keresés
     document.getElementById("searchBox").addEventListener("input", function() {
@@ -102,15 +120,7 @@
         return;
       }
 
-      matches.forEach(row => {
-        const el = document.createElement("div");
-        el.className = "item";
-        el.innerHTML = `
-          <img src="${row.icon_url}" alt="icon">
-          <span><b>${row.item_name}</b> → ${row.spec} (${row.slot})</span>
-        `;
-        resultsDiv.appendChild(el);
-      });
+      matches.forEach(row => resultsDiv.appendChild(renderItem(row)));
     });
 
     // Spec BIS lista
@@ -131,15 +141,7 @@
       }
 
       resultsDiv.innerHTML = `<h3>${selectedSpec} BIS lista:</h3>`;
-      matches.forEach(row => {
-        const el = document.createElement("div");
-        el.className = "item";
-        el.innerHTML = `
-          <img src="${row.icon_url}" alt="icon">
-          <span><b>${row.item_name}</b> → ${row.slot}</span>
-        `;
-        resultsDiv.appendChild(el);
-      });
+      matches.forEach(row => resultsDiv.appendChild(renderItem(row, false)));
     });
   </script>
 </body>
