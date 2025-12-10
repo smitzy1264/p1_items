@@ -34,7 +34,18 @@
       background: rgba(0,0,0,0.5);
       padding: 10px;
       border-radius: 8px;
-      width: 320px;
+      width: 340px;
+    }
+    .item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .item img {
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -92,7 +103,13 @@
       }
 
       matches.forEach(row => {
-        resultsDiv.innerHTML += `<p><b>${row.item_name}</b> → ${row.spec} (${row.slot})</p>`;
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `
+          <img src="${row.icon_url}" alt="icon">
+          <span><b>${row.item_name}</b> → ${row.spec} (${row.slot})</span>
+        `;
+        resultsDiv.appendChild(el);
       });
     });
 
@@ -115,7 +132,13 @@
 
       resultsDiv.innerHTML = `<h3>${selectedSpec} BIS lista:</h3>`;
       matches.forEach(row => {
-        resultsDiv.innerHTML += `<p><b>${row.item_name}</b> → ${row.slot}</p>`;
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `
+          <img src="${row.icon_url}" alt="icon">
+          <span><b>${row.item_name}</b> → ${row.slot}</span>
+        `;
+        resultsDiv.appendChild(el);
       });
     });
   </script>
