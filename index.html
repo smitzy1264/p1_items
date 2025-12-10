@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
-  <title>WotLK BIS kereső</title>
+  <title>WotLK BIS kereső tooltip</title>
   <style>
     body {
       margin: 0;
@@ -43,23 +43,16 @@
     .tooltip {
       visibility: hidden;
       position: absolute;
-      bottom: 100%;       /* felfelé nyíljon */
+      bottom: 100%;       /* alapból felfelé */
       left: 105%;         /* jobbra tolva */
-      transform: translateY(-5px); /* kicsit feljebb tolja */
+      transform: translateY(-5px);
       z-index: 1;
       background: rgba(0,0,0,0.8);
       padding: 5px;
       border-radius: 6px;
     }
     .tooltip img {
-      width: auto;
-      height: auto;
-      max-width: none;
-      max-height: none;
       display: block;
-    }
-    .item:hover .tooltip {
-      visibility: visible;
     }
   </style>
 </head>
@@ -103,6 +96,34 @@
           <img src="icons/${row.icon_url}" alt="icon">
         </div>
       `;
+
+      const tooltip = el.querySelector(".tooltip");
+
+      // dinamikus irányváltás
+      el.addEventListener("mouseenter", () => {
+        tooltip.style.visibility = "visible";
+
+        const rect = tooltip.getBoundingClientRect();
+
+        // ha túl fent van → lefelé nyíljon
+        if (rect.top < 0) {
+          tooltip.style.bottom = "auto";
+          tooltip.style.top = "100%";
+        }
+        // ha túl lent van → felfelé nyíljon
+        else if (rect.bottom > window.innerHeight) {
+          tooltip.style.top = "auto";
+          tooltip.style.bottom = "100%";
+        }
+      });
+
+      el.addEventListener("mouseleave", () => {
+        tooltip.style.visibility = "hidden";
+        // visszaállítjuk az alapbeállítást
+        tooltip.style.top = "auto";
+        tooltip.style.bottom = "100%";
+      });
+
       return el;
     }
 
