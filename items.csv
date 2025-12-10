@@ -1,6 +1,22 @@
-﻿item_name;character;slot
-shadowmourne;Arms warrior;weapon
-shadowmourne;Retri pala;weapon
-dying curse;demo warlock;trinket
-dying curse;sh pap;trinket
-dying curse;affli warlock;trinket
+﻿item_name;character;slot;spec
+shadowmourne;warrior;weapon;Arms
+shadowmourne;pala;weapon;Retribution
+dying curse;warlock;trinket;Demonolgy
+dying curse;priest;trinket;Shadow
+T7;warlock;head;Affliction
+Wyrmest Necklace of Power;warlock;neck;Affliction
+T7;warlock;shoulder;Affliction
+Pennant Cloak;warlock;back;Affliction
+T7;warlock;chest;Affliction
+Unsillied Cuffs;warlock;wrist;Affliction
+T7;warlock;hands;Affliction
+Leash of Heedless Magic;warlock;waist;Affliction
+Leggins of the Wanton Spellcaster;warlock;legs;Affliction
+Arcanic Tramplers;warlock;feet;Affliction
+Signet of Manifested Pain;warlock;ring;Affliction
+Band of Channeled Magic;warlock;ring;Affliction
+Dying Curse;warlock;trinket;Affliction
+Illustration of the Dragon Soul;warlock;trinket;Affliction
+The Turning Tide;warlock;weapon;Affliction
+Matriarch's Spawn;warlock;offhand;Affliction
+Wand of the Archlich;warlock;relic;Affliction
